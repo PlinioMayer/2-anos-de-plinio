@@ -1,6 +1,8 @@
 import Terminal from "@/components/terminal";
+import { getOrder } from "@/constants/screens";
+import { useSave } from "@/contexts/save-context";
+import { useEffect } from "react";
 import { StyleSheet, TouchableHighlight } from "react-native";
-import { useSave } from "@/hooks/save";
 
 const styles = StyleSheet.create({
   main: {
@@ -13,7 +15,13 @@ const styles = StyleSheet.create({
 const handlePress = () => {};
 
 const Suporte = () => {
-  useSave("recompensa");
+  const { save, setSave } = useSave();
+
+  useEffect(() => {
+    if (save && getOrder(save) < getOrder("recompensa")) {
+      setSave("recompensa");
+    }
+  }, [save, setSave]);
 
   return (
     <TouchableHighlight style={styles.main} onPress={handlePress}>

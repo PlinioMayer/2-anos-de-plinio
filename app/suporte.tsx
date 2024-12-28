@@ -1,9 +1,11 @@
 import Terminal from "@/components/terminal";
 import { ThemedView } from "@/components/themed-view";
-import { StyleSheet, Touchable, TouchableHighlight } from "react-native";
+import { StyleSheet, TouchableHighlight } from "react-native";
 import { Image } from "expo-image";
-import { useSave } from "@/hooks/save";
 import { router } from "expo-router";
+import { useEffect } from "react";
+import { getOrder } from "@/constants/screens";
+import { useSave } from "@/contexts/save-context";
 
 const styles = StyleSheet.create({
   touchable: {
@@ -29,7 +31,13 @@ const handlePress = () => {
 };
 
 const Suporte = () => {
-  useSave("suporte");
+  const { save, setSave } = useSave();
+
+  useEffect(() => {
+    if (save && getOrder(save) < getOrder("suporte")) {
+      setSave("suporte");
+    }
+  }, [save, setSave]);
 
   return (
     <TouchableHighlight style={styles.touchable} onPress={handlePress}>

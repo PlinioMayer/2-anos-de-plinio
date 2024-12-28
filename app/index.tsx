@@ -1,5 +1,5 @@
 import Terminal from "@/components/terminal";
-import { useLoad } from "@/hooks/save";
+import { useSave } from "@/contexts/save-context";
 import { Href, router } from "expo-router";
 import { hideAsync } from "expo-splash-screen";
 import { useEffect } from "react";
@@ -18,17 +18,24 @@ const handlePress = () => {
 };
 
 const App = () => {
-  const save = useLoad();
+  const { save, setSave } = useSave();
 
   useEffect(() => {
     if (save !== undefined) {
-      if (save !== null) {
-        router.replace(save as Href);
+      switch (save) {
+        case null:
+          setSave("index");
+          break;
+        case "index":
+          break;
+        default:
+          router.replace(`/${save}`);
+          break;
       }
 
       hideAsync();
     }
-  }, [save]);
+  }, [save, setSave]);
 
   return (
     <TouchableHighlight onPress={handlePress} style={styles.main}>
