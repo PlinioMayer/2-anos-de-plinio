@@ -35,7 +35,7 @@ const SupportButton = ({ children }: SupportButtonProps) => {
     <ThemedView style={styles.main}>
       {children}
       <TouchableHighlight onPress={openSupport} style={styles.button}>
-        <ThemedText type="title">?</ThemedText>
+        <ThemedText type="subtitle">?</ThemedText>
       </TouchableHighlight>
     </ThemedView>
   );

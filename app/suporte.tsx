@@ -1,9 +1,14 @@
 import Terminal from "@/components/terminal";
 import { ThemedView } from "@/components/themed-view";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Touchable, TouchableHighlight } from "react-native";
 import { Image } from "expo-image";
+import { useSave } from "@/hooks/save";
+import { router } from "expo-router";
 
 const styles = StyleSheet.create({
+  touchable: {
+    flex: 1,
+  },
   main: {
     alignItems: "center",
     justifyContent: "center",
@@ -19,20 +24,28 @@ const styles = StyleSheet.create({
   },
 });
 
+const handlePress = () => {
+  router.replace("/recompensa");
+};
+
 const Suporte = () => {
+  useSave("suporte");
+
   return (
-    <ThemedView style={styles.main}>
-      <Terminal
-        text={
-          "A qualquer momento,\nvocê pode utilizar o botão de suporte\npara obter ajuda do time especializado."
-        }
-      />
-      <Image
-        style={styles.image}
-        source={require("@/assets/images/arrow.png")}
-        contentFit="contain"
-      />
-    </ThemedView>
+    <TouchableHighlight style={styles.touchable} onPress={handlePress}>
+      <ThemedView style={styles.main}>
+        <Terminal
+          text={
+            "A qualquer momento,\nvocê pode utilizar o botão de suporte\npara obter ajuda do time especializado."
+          }
+        />
+        <Image
+          style={styles.image}
+          source={require("@/assets/images/arrow.png")}
+          contentFit="contain"
+        />
+      </ThemedView>
+    </TouchableHighlight>
   );
 };
 
