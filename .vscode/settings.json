@@ -1,6 +1,10 @@
 {
-    "editor.formatOnPaste": true,
-    "editor.formatOnSave": true,
-    "editor.tabSize": 2,
-    "editor.detectIndentation": false
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "editor.detectIndentation": false,
+  "eslint.format.enable": true,
+  "eslint.options": {
+    "overrideConfigFile": "./.eslintrc.json"
+  }
 }

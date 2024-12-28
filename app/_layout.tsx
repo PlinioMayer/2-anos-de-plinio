@@ -1,3 +1,4 @@
+import SupportButton from "@/components/suport-button";
 import { DarkTheme, ThemeProvider } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
@@ -26,9 +27,12 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={DarkTheme}>
-      <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="index" />
-      </Stack>
+      <SupportButton>
+        <Stack screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="index" />
+          <Stack.Screen name="suporte" />
+        </Stack>
+      </SupportButton>
       <StatusBar style="auto" />
     </ThemeProvider>
   );

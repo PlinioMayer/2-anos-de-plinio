@@ -6,6 +6,7 @@ import { Colors } from "@/constants/colors";
 
 export type TerminalProps = {
   text: string;
+  expectedInput?: string;
 };
 
 const styles = StyleSheet.create({
@@ -24,21 +25,21 @@ const styles = StyleSheet.create({
   },
 });
 
-const Terminal = ({ text }: TerminalProps) => {
+const Terminal = ({ text, expectedInput }: TerminalProps) => {
   const [currentText, setCurrentText] = useState<string>("");
   const [cursorOpacity, setCursorOpacity] = useState<0 | 1>(0);
   const [input, setInput] = useState<string>("");
   const inputRef = useRef<TextInput>() as MutableRefObject<TextInput>;
 
   useEffect(() => {
-    let auxText = currentText;
+    let auxText = "";
     let flickeringInterval: number | NodeJS.Timeout;
-    let auxCursorDisplay = cursorOpacity;
+    let auxCursorDisplay: 0 | 1 = 0;
 
     const interval = setInterval(() => {
       if (auxText.length === text.length) {
         clearInterval(interval);
-        inputRef.current.focus();
+        inputRef.current?.focus();
         flickeringInterval = setInterval(() => {
           auxCursorDisplay = auxCursorDisplay === 0 ? 1 : 0;
           setCursorOpacity(auxCursorDisplay);
@@ -62,7 +63,13 @@ const Terminal = ({ text }: TerminalProps) => {
         <ThemedText>{input}</ThemedText>
         <View style={[styles.cursor, { opacity: cursorOpacity }]} />
       </ThemedView>
-      <TextInput onChangeText={setInput} style={styles.input} ref={inputRef} />
+      {expectedInput && (
+        <TextInput
+          onChangeText={setInput}
+          style={styles.input}
+          ref={inputRef}
+        />
+      )}
     </ThemedView>
   );
 };

@@ -1,6 +1,6 @@
 import Terminal from "@/components/terminal";
-import { ThemedView } from "@/components/themed-view";
-import { StyleSheet } from "react-native";
+import { router } from "expo-router";
+import { StyleSheet, TouchableHighlight } from "react-native";
 
 const styles = StyleSheet.create({
   main: {
@@ -12,9 +12,18 @@ const styles = StyleSheet.create({
 
 const App = () => {
   return (
-    <ThemedView style={styles.main}>
-      <Terminal text="This screen doesn't exist." />
-    </ThemedView>
+    <TouchableHighlight
+      onPress={() => {
+        router.replace("/suporte");
+      }}
+      style={styles.main}
+    >
+      <Terminal
+        text={
+          "Olá, Liliana!\nBem-vinda ao seu presente.\nIremos começar com um tutorial.\nClique na tela para prosseguir."
+        }
+      />
+    </TouchableHighlight>
   );
 };
 
