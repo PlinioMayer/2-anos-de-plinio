@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useCallback, useContext } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
-import { ScreenName } from "@/constants/screens";
+import { getOrder, ScreenName } from "@/constants/screens";
 
 export type SaveValue = {
   save?: ScreenName | null;
@@ -13,6 +13,16 @@ export const SAVE_KEY = "save";
 export const SaveContext = createContext<SaveValue>({ setSave: () => {} });
 
 export const useSave = () => useContext(SaveContext);
+
+export const useUpdateSave = (screen: ScreenName) => {
+  const { save, setSave } = useSave();
+
+  useEffect(() => {
+    if (save && getOrder(save) < getOrder(screen)) {
+      setSave(screen);
+    }
+  }, [save, setSave, screen]);
+};
 
 export const SaveProvider = ({ children }: { children: ReactNode }) => {
   const [save, setSave] = useState<ScreenName | undefined | null>();

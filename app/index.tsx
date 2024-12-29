@@ -1,16 +1,11 @@
-import Terminal from "@/components/terminal";
 import { ThemedView } from "@/components/themed-view";
 import { Colors } from "@/constants/colors";
-import { useSave } from "@/contexts/save-context";
+import { useSave } from "@/contexts/save.context";
 import { useFonts } from "expo-font";
-import { router } from "expo-router";
+import { Redirect, router } from "expo-router";
 import { hideAsync } from "expo-splash-screen";
 import { useEffect } from "react";
-import {
-  TouchableHighlight,
-  StyleSheet,
-  ActivityIndicator,
-} from "react-native";
+import { ActivityIndicator, StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   main: {
@@ -19,10 +14,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-
-const handlePress = () => {
-  router.replace("/suporte");
-};
 
 const App = () => {
   const { save, setSave } = useSave();
@@ -38,9 +29,8 @@ const App = () => {
     if (save !== undefined) {
       switch (save) {
         case null:
-          setSave("index");
-          break;
-        case "index":
+          setSave("00-bem-vinda");
+        case "00-bem-vinda":
           break;
         default:
           router.replace(`/${save}`);
@@ -59,15 +49,7 @@ const App = () => {
     );
   }
 
-  return (
-    <TouchableHighlight onPress={handlePress} style={styles.main}>
-      <Terminal
-        text={
-          "Olá, Liliana!\nBem-vinda ao seu presente.\nIremos começar com um tutorial.\nClique na tela para prosseguir."
-        }
-      />
-    </TouchableHighlight>
-  );
+  return <Redirect href="/00-bem-vinda" />;
 };
 
 export default App;

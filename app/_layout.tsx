@@ -5,7 +5,7 @@ import { StatusBar } from "expo-status-bar";
 import "react-native-reanimated";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Drawer } from "expo-router/drawer";
-import { SaveProvider, useSave } from "@/contexts/save-context";
+import { SaveProvider, useSave } from "@/contexts/save.context";
 import { getOrder, ScreenName, Screens } from "@/constants/screens";
 import { Colors } from "@/constants/colors";
 
@@ -19,12 +19,18 @@ const RootLayout = () => {
       <SupportButton>
         <GestureHandlerRootView style={{ flex: 1 }}>
           <Drawer
+            initialRouteName="00-bem-vinda"
             screenOptions={{
-              headerShown: true,
+              headerShown: false,
+              swipeEdgeWidth: 150,
               drawerActiveBackgroundColor: Colors.tint,
               drawerActiveTintColor: "#FFF",
             }}
           >
+            <Drawer.Screen
+              name="index"
+              options={{ drawerItemStyle: { display: "none" } }}
+            />
             {Object.entries(Screens).map(([name, options]) => (
               <Drawer.Screen
                 name={name}
@@ -33,7 +39,8 @@ const RootLayout = () => {
                   ...options,
                   drawerItemStyle: {
                     display:
-                      getOrder(save ?? "index") >= getOrder(name as ScreenName)
+                      getOrder(save ?? "00-bem-vinda") >=
+                      getOrder(name as ScreenName)
                         ? "flex"
                         : "none",
                   },
