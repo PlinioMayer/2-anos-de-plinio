@@ -1,27 +1,7 @@
-import Drawer from "expo-router/drawer";
-
 export const Screens = {
-  index: (
-    <Drawer.Screen
-      name="index"
-      key={"index"}
-      options={{ drawerLabel: "Bem-vinda" }}
-    />
-  ),
-  suporte: (
-    <Drawer.Screen
-      name="suporte"
-      key="suporte"
-      options={{ drawerLabel: "Suporte" }}
-    />
-  ),
-  recompensa: (
-    <Drawer.Screen
-      name="recompensa"
-      key="recompensa"
-      options={{ drawerLabel: "Recompensa" }}
-    />
-  ),
+  index: { drawerLabel: "Bem-vinda" },
+  suporte: { drawerLabel: "Suporte" },
+  recompensa: { drawerLabel: "Recompensa" },
 } as const;
 
 export type ScreenName = keyof typeof Screens;
