@@ -13,6 +13,6 @@ export const sucesso = (screen: ScreenName, message?: string) => {
   ]);
 };
 
-export const erro = () => {
-  Alert.alert("Oops, nananinanão...", undefined, [{ text: "Ok :(" }]);
+export const erro = (message?: string) => {
+  Alert.alert("Oops, nananinanão...", message, [{ text: "Ok :(" }]);
 };

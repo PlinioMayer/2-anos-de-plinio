@@ -4,6 +4,9 @@ export const Screens = {
   "02-modo-aviao": { drawerLabel: "Modo Avião" },
   "03-suporte": { drawerLabel: "Suporte" },
   "04-recompensa": { drawerLabel: "Recompensa" },
+  "05-comecar": { drawerLabel: "Começo" },
+  "06-nome": { drawerLabel: "Seu nome" },
+  "07-primeiro-filme": { drawerLabel: "Primeiro filme" },
 } as const;
 
 export type ScreenName = keyof typeof Screens;

@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderColor: Colors.tint,
     borderWidth: 1,
-    padding: 3,
+    paddingRight: 3,
     alignItems: "center",
     color: Colors.tint,
   },
@@ -74,7 +74,9 @@ const Terminal = ({ text, onSend, onPress }: TerminalProps) => {
     interval.current = setInterval(() => {
       if (auxText.length === text.length) {
         clearInterval(interval.current);
-        focusInput();
+        if (onSend) {
+          focusInput();
+        }
         return;
       }
       auxText += text[auxText.length];
@@ -84,7 +86,7 @@ const Terminal = ({ text, onSend, onPress }: TerminalProps) => {
     return () => {
       clearInterval(interval.current);
     };
-  }, [setCurrentText, text, focusInput]);
+  }, [setCurrentText, text, focusInput, onSend]);
 
   return (
     <CenteredTouchable onPress={handlePress}>
@@ -93,7 +95,9 @@ const Terminal = ({ text, onSend, onPress }: TerminalProps) => {
         <ThemedView
           style={[
             styles.inputWrapper,
-            { opacity: onSend && currentText === text ? 1 : 0 },
+            onSend && currentText === text
+              ? { opacity: 1 }
+              : { opacity: 0, width: 0, height: 0 },
           ]}
         >
           <TextInput
@@ -102,6 +106,7 @@ const Terminal = ({ text, onSend, onPress }: TerminalProps) => {
             ref={inputRef}
             onSubmitEditing={handleSend}
             value={input}
+            selectionColor={Colors.tint}
           />
           <TouchableHighlight onPress={handleSend}>
             <Ionicons name="send" size={20} color={Colors.tint} />
