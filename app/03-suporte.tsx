@@ -4,7 +4,6 @@ import { StyleSheet } from "react-native";
 import { Image } from "expo-image";
 import { router } from "expo-router";
 import { useUpdateSave } from "@/contexts/save.context";
-import CenteredTouchable from "@/components/centered-touchable";
 
 const styles = StyleSheet.create({
   touchable: {

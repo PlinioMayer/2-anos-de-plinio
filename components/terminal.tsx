@@ -103,7 +103,7 @@ const Terminal = ({ text, onSend, onPress }: TerminalProps) => {
             onSubmitEditing={handleSend}
             value={input}
           />
-          <TouchableHighlight onPress={handlePress}>
+          <TouchableHighlight onPress={handleSend}>
             <Ionicons name="send" size={20} color={Colors.tint} />
           </TouchableHighlight>
         </ThemedView>

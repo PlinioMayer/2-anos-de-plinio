@@ -1,11 +1,10 @@
 import Terminal from "@/components/terminal";
 import { useUpdateSave } from "@/contexts/save.context";
-import { sucesso } from "@/utils/alert.utils";
-import { Alert } from "react-native";
+import { erro, sucesso } from "@/utils/alert.utils";
 
 const onSend = (value: string) => {
   if (!/obrigad[oa]|grat[oa]|gratid[aã]o|gratiluz/i.test(value)) {
-    // Alert.alert("Oops, nananinanão...");
+    erro();
     return;
   }
 
@@ -19,7 +18,7 @@ const onSend = (value: string) => {
     message = "GRATILUZ?";
   }
 
-  // sucesso("02-modo-aviao", message);
+  sucesso("02-modo-aviao", message);
 };
 
 const Agradecimento = () => {
