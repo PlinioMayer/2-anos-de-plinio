@@ -29,13 +29,12 @@ const Suporte = () => {
 
   return (
     <>
-      <CenteredTouchable onPress={handlePress}>
-        <Terminal
-          text={
-            "A qualquer momento,\nvocê pode utilizar o botão de suporte\npara obter ajuda do time especializado."
-          }
-        />
-      </CenteredTouchable>
+      <Terminal
+        text={
+          "A qualquer momento,\nvocê pode utilizar o botão de suporte\npara obter ajuda do time especializado."
+        }
+        onPress={handlePress}
+      />
       <Image
         style={styles.image}
         source={require("@/assets/images/arrow.png")}

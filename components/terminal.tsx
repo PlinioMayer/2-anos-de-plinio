@@ -5,87 +5,75 @@ import {
   useRef,
   useState,
 } from "react";
-import { ThemedView } from "./themed-view";
 import { ThemedText } from "./themed-text";
 import {
+  GestureResponderEvent,
   StyleSheet,
   TextInput,
   TouchableHighlight,
-  TouchableWithoutFeedback,
-  View,
+  TouchableHighlightProps,
 } from "react-native";
 import { Colors } from "@/constants/colors";
-import Ionicons from "@expo/vector-icons/Ionicons";
+import CenteredTouchable from "./centered-touchable";
+import { ThemedView } from "./themed-view";
+import { Ionicons } from "@expo/vector-icons";
 
 export type TerminalProps = {
   text: string;
+  onPress?: TouchableHighlightProps["onPress"];
   onSend?: (value: string) => void;
 };
 
 const styles = StyleSheet.create({
-  cursor: {
-    width: 8,
-    height: 15,
-    backgroundColor: Colors.text,
-  },
   inputWrapper: {
     flexDirection: "row",
     borderRadius: 5,
     borderColor: Colors.tint,
     borderWidth: 1,
-    paddingLeft: 5,
-    paddingRight: 3,
+    padding: 3,
     alignItems: "center",
-  },
-  inputTouchable: {
-    flex: 1,
-  },
-  inputFeedback: {
-    flexDirection: "row",
-    alignItems: "center",
-    height: 24,
-    flex: 1,
+    color: Colors.tint,
   },
   input: {
-    opacity: 0,
-    height: 0,
-    width: 0,
-  },
+    flex: 1,
+    outlineStyle: "none",
+    color: Colors.tint,
+  } as StyleSheet.NamedStyles<any>,
 });
 
-const Terminal = ({ text, onSend }: TerminalProps) => {
+const Terminal = ({ text, onSend, onPress }: TerminalProps) => {
   const [currentText, setCurrentText] = useState<string>("");
-  const [cursorOpacity, setCursorOpacity] = useState<0 | 1>(0);
   const [input, setInput] = useState<string>("");
   const inputRef = useRef<TextInput>() as MutableRefObject<TextInput>;
+  let interval = useRef<number | NodeJS.Timeout>();
   const focusInput = useCallback(() => {
     inputRef.current?.focus();
   }, [inputRef]);
-  const handlePress = useCallback(() => {
+  const handlePress = useCallback(
+    (e: GestureResponderEvent) => {
+      if (text !== currentText) {
+        setCurrentText(text);
+        clearInterval(interval.current);
+      }
+
+      if (onPress) {
+        onPress(e);
+      }
+    },
+    [onPress, text, currentText],
+  );
+  const handleSend = useCallback(() => {
     if (onSend) {
       onSend(input);
     }
   }, [onSend, input]);
 
   useEffect(() => {
-    let auxCursorOpacity: 0 | 1 = 0;
-
-    const interval = setInterval(() => {
-      auxCursorOpacity = auxCursorOpacity === 0 ? 1 : 0;
-      setCursorOpacity(auxCursorOpacity);
-    }, 400);
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, [setCursorOpacity]);
-
-  useEffect(() => {
     let auxText = "";
 
-    const interval = setInterval(() => {
+    interval.current = setInterval(() => {
       if (auxText.length === text.length) {
-        clearInterval(interval);
+        clearInterval(interval.current);
         focusInput();
         return;
       }
@@ -94,36 +82,33 @@ const Terminal = ({ text, onSend }: TerminalProps) => {
     }, 50);
 
     return () => {
-      clearInterval(interval);
+      clearInterval(interval.current);
     };
   }, [setCurrentText, text, focusInput]);
 
   return (
-    <ThemedView>
-      <ThemedText>{currentText}</ThemedText>
-      {onSend && currentText === text && (
-        <View style={styles.inputWrapper}>
-          <TouchableWithoutFeedback
-            style={styles.inputTouchable}
-            onPress={focusInput}
-          >
-            <View style={styles.inputFeedback}>
-              <ThemedText>{input}</ThemedText>
-              <View style={[styles.cursor, { opacity: cursorOpacity }]} />
-            </View>
-          </TouchableWithoutFeedback>
-          <TouchableHighlight onPress={handlePress}>
-            <Ionicons name="send" size={20} color={Colors.tint} />
-          </TouchableHighlight>
+    <CenteredTouchable onPress={handlePress}>
+      <ThemedView>
+        <ThemedText>{currentText}</ThemedText>
+        <ThemedView
+          style={[
+            styles.inputWrapper,
+            { opacity: onSend && currentText === text ? 1 : 0 },
+          ]}
+        >
           <TextInput
             onChangeText={setInput}
             style={styles.input}
             ref={inputRef}
-            onSubmitEditing={handlePress}
+            onSubmitEditing={handleSend}
+            value={input}
           />
-        </View>
-      )}
-    </ThemedView>
+          <TouchableHighlight onPress={handlePress}>
+            <Ionicons name="send" size={20} color={Colors.tint} />
+          </TouchableHighlight>
+        </ThemedView>
+      </ThemedView>
+    </CenteredTouchable>
   );
 };
 
