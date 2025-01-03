@@ -24,7 +24,14 @@
       "icon": "./assets/images/icon.png"
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      [
+        "expo-location",
+        {
+          "isAndroidForegroundServiceEnabled": "Permita que $(PRODUCT_NAME) use sua localização."
+        }
+      ],
+      "expo-video"
     ],
     "experiments": {
       "typedRoutes": true

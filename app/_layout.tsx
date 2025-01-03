@@ -2,12 +2,12 @@ import SupportButton from "@/components/suport-button";
 import { DarkTheme, ThemeProvider } from "@react-navigation/native";
 import { preventAutoHideAsync } from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
-import "react-native-reanimated";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Drawer } from "expo-router/drawer";
 import { SaveProvider, useSave } from "@/contexts/save.context";
 import { getOrder, ScreenName, Screens } from "@/constants/screens";
 import { Colors } from "@/constants/colors";
+import "react-native-reanimated";
 
 preventAutoHideAsync();
 

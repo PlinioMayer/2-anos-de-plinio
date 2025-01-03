@@ -4,7 +4,7 @@ import { erro, sucesso } from "@/utils/alert.utils";
 
 const handleSend = (value: string) => {
   if (/saltburn/i.test(value)) {
-    sucesso("00-bem-vinda");
+    sucesso("08-pergunta-fundamental");
     return;
   }
 

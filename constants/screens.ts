@@ -3,10 +3,16 @@ export const Screens = {
   "01-agradecimento": { drawerLabel: "Agradecimento" },
   "02-modo-aviao": { drawerLabel: "Modo Avião" },
   "03-suporte": { drawerLabel: "Suporte" },
-  "04-recompensa": { drawerLabel: "Recompensa" },
+  "04-motivacao": { drawerLabel: "Recompensa" },
   "05-comecar": { drawerLabel: "Começo" },
   "06-nome": { drawerLabel: "Seu nome" },
   "07-primeiro-filme": { drawerLabel: "Primeiro filme" },
+  "08-pergunta-fundamental": { drawerLabel: "Pergunta fundamental" },
+  "09-into-the-wild": { drawerLabel: "Into the Wild" },
+  "10-horario-filme": { drawerLabel: "Horário do filme" },
+  "11-mesmo-aniversario": { drawerLabel: "Mesmo aniversário" },
+  "12-onde-nos-conhecemos": { drawerLabel: "Onde nos conhecemos" },
+  "13-recompensa": { drawerLabel: "Recompensa" },
 } as const;
 
 export type ScreenName = keyof typeof Screens;

@@ -6,8 +6,8 @@ const handlePress = () => {
   router.replace("/05-comecar");
 };
 
-const Suporte = () => {
-  useUpdateSave("04-recompensa");
+const Motivacao = () => {
+  useUpdateSave("04-motivacao");
 
   return (
     <Terminal
@@ -19,4 +19,4 @@ const Suporte = () => {
   );
 };
 
-export default Suporte;
+export default Motivacao;

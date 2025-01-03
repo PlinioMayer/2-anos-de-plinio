@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
 });
 
 const handlePress = () => {
-  router.replace("/04-recompensa");
+  router.replace("/04-motivacao");
 };
 
 const Suporte = () => {

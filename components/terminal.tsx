@@ -54,6 +54,7 @@ const Terminal = ({ text, onSend, onPress }: TerminalProps) => {
       if (text !== currentText) {
         setCurrentText(text);
         clearInterval(interval.current);
+        return;
       }
 
       if (onPress) {
