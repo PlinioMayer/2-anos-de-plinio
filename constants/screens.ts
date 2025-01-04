@@ -13,7 +13,6 @@ export const Screens = {
   "11-mesmo-aniversario": { drawerLabel: "Mesmo aniversário" },
   "12-onde-nos-conhecemos": { drawerLabel: "Onde nos conhecemos" },
   "13-recompensa": { drawerLabel: "Recompensa" },
-  "muito-cedo": { drawerLabel: "Muito cedo" },
 } as const;
 
 export type ScreenName = keyof typeof Screens;

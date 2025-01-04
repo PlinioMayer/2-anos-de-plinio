@@ -8,18 +8,19 @@ import { SaveProvider, useSave } from "@/contexts/save.context";
 import { getOrder, ScreenName, Screens } from "@/constants/screens";
 import { Colors } from "@/constants/colors";
 import "react-native-reanimated";
+import { isBeforeBirthday } from "@/utils/birthday.utils";
 
 preventAutoHideAsync();
 
 const RootLayout = () => {
   const { save } = useSave();
+  const tooSoon = isBeforeBirthday();
 
   return (
     <ThemeProvider value={DarkTheme}>
       <SupportButton>
         <GestureHandlerRootView style={{ flex: 1 }}>
           <Drawer
-            initialRouteName="00-bem-vinda"
             screenOptions={{
               headerShown: false,
               swipeEdgeWidth: 150,
@@ -31,6 +32,13 @@ const RootLayout = () => {
               name="index"
               options={{ drawerItemStyle: { display: "none" } }}
             />
+            <Drawer.Screen
+              name="muito-cedo"
+              options={{
+                drawerLabel: "Muito cedo",
+                drawerItemStyle: { display: tooSoon ? "flex" : "none" },
+              }}
+            />
             {Object.entries(Screens).map(([name, options]) => (
               <Drawer.Screen
                 name={name}
@@ -39,10 +47,11 @@ const RootLayout = () => {
                   ...options,
                   drawerItemStyle: {
                     display:
-                      getOrder(save ?? "00-bem-vinda") >=
-                      getOrder(name as ScreenName)
-                        ? "flex"
-                        : "none",
+                      tooSoon ||
+                      getOrder(save ?? "00-bem-vinda") <
+                        getOrder(name as ScreenName)
+                        ? "none"
+                        : "flex",
                   },
                 }}
               />
