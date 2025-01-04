@@ -37,7 +37,7 @@ const OndeNosConhecemos = () => {
               Math.cos(currentPosition.coords.longitude - longitude),
         ) * 63710;
 
-      if (distancia < 50) {
+      if (distancia < 20) {
         sucesso("13-recompensa");
       } else {
         erro(
