@@ -12,8 +12,8 @@ import CenteredView from "@/components/centered-view";
 import { ActivityIndicator } from "react-native";
 import { Colors } from "@/constants/colors";
 
-const latitude = -15.83096784776469;
-const longitude = -47.915736798976766;
+const latitude = -15.7538964;
+const longitude = -47.8812809;
 
 const OndeNosConhecemos = () => {
   useUpdateSave("12-onde-nos-conhecemos");
