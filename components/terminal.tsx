@@ -30,15 +30,14 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderColor: Colors.tint,
     borderWidth: 1,
-    paddingRight: 3,
+    paddingRight: 5,
     alignItems: "center",
     color: Colors.tint,
   },
   input: {
     flex: 1,
-    outlineStyle: "none",
     color: Colors.tint,
-  } as StyleSheet.NamedStyles<any>,
+  },
 });
 
 const Terminal = ({ text, onSend, onPress }: TerminalProps) => {
