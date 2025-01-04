@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "3 anos de Plínio",
-    "slug": "3-anos-de-plinio",
+    "name": "2 anos de Plínio",
+    "slug": "2-anos-de-plinio",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "com.plinio.3-anos-de-plinio",
+    "scheme": "com.plinio.2-anos-de-plinio",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
@@ -44,9 +44,6 @@
     "extra": {
       "router": {
         "origin": false
-      },
-      "eas": {
-        "projectId": "2480c2cf-a192-44f9-94fa-cc23aca2e8c1"
       }
     }
   }
